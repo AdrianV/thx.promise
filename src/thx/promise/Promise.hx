@@ -235,7 +235,7 @@ abstract Promise<T>(Future<Result<T, Error>>) to Future<Result<T, Error>> {
     return flatMap(function(v) return Promise.value(success(v)));
 
   public function ap<U>(pf: Promise<T -> U>): Promise<U>
-    return flatMap(function(t) return pf.map.fn(_(t)));
+    return flatMap(function(t) return pf.map(c -> c(t)));
 
   @:deprecated("mapSuccess is deprecated. Use map instead")
   inline public function mapSuccess<TOut>(success : T -> TOut) : Promise<TOut>
